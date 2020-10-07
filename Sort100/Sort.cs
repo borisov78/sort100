@@ -5,7 +5,10 @@ using Sort100.Params;
 
 namespace Sort100
 {
-    public sealed class Sort: IDisposable
+    /// <summary>
+    /// Объект-контейнер, имеющий все необходимое для выполнения всех фаз сортировки.
+    /// </summary>
+    public sealed class Sort
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly AlgParams _algParams;
@@ -38,10 +41,6 @@ namespace Sort100
             var sortedChunksReaders = _sortedChunksStorage.GetStoredChunkReaders();
             Console.WriteLine("Merge sort..");
             _externalMergeSort.Sort(sortedChunksReaders);
-        }
-
-        public void Dispose()
-        {
         }
     }
 }

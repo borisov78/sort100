@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime;
 using Microsoft.Extensions.DependencyInjection;
 using Sort100.Common;
 using Sort100.Helpers;
@@ -36,13 +35,13 @@ namespace Sort100
             // Важные параметры, влияющие на потребление памяти алгоритмом.
             // Рассчитываем, что будем параллелить сортировку чанков по числу ядер процессора (WorkersCount).
             //
-            // Размер одного чанка (ChunkSizeInChars) - 64Mb. Экспериментальным путем было выяснено,
-            // что на больших размерностях сортировка работает менее эфективно, а на меньших
-            // - создается слишком много  временных файлов.
+            // Размер одного чанка (ChunkSizeInChars) - 128Mb. Экспериментальным путем было выяснено,
+            // что на больших размерностях сортировка одного чанка работает менее эффективно, а на меньших
+            // - создается слишком много временных файлов и менее эффективно работает слияние.
             //
-            // Количество объектов в чанке (ChunkCapacity) - эвристика, рассчитанная на основе средней длины строки (20 символов)
+            // Количество объектов в чанке (ChunkCapacity) - эвристика, рассчитанная на основе средней длины строки (60 символов)
             // При превышении ChunkSizeInChars или ChunkCapacity - текущий чанк закрывается. 
-            const ulong chunkSizeInBytes = 1024 * 1024 * 64; // 64 Mb
+            const ulong chunkSizeInBytes = 1024 * 1024 * 128; // 128 Mb
             var chunkSizeInChars = (int) (encoding.IsSingleByte ? chunkSizeInBytes : chunkSizeInBytes / 2);
             return new AlgParams
             {

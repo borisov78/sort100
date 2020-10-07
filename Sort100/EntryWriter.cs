@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Sort100
 {
+    /// <summary>
+    /// Сериализатор объектов Entry в стрим.
+    /// </summary>
     internal sealed class EntryWriter : IDisposable
     {
         private readonly StreamWriter _streamWriter;

@@ -15,9 +15,9 @@ namespace Sort100
         public Chunk(ArrayPool<Entry> parentPool, int capacity)
         {
             _parentPool = parentPool;
+            // Для предотвращения фрагментации LOH берем буфера из пула
             Entries = _parentPool.Rent(capacity);
         }
-
 
         public void Add(Entry entry)
         {
@@ -27,6 +27,8 @@ namespace Sort100
 
         public ReadOnlySpan<Entry> ToSpan()
         {
+            // Буфер может быть заполнен не полностью - поэтому на дальнейшую обработку отдаем "окно",
+            // сделанное по актуальному размеру
             return Entries.AsSpan(0, _position);
         }
 

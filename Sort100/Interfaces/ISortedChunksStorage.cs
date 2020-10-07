@@ -1,7 +1,7 @@
 ﻿namespace Sort100.Interfaces
 {
     /// <summary>
-    /// Хранилищие подмножеств отсортированных объектов (Chunk).
+    /// Хранилище подмножеств отсортированных объектов (Chunk).
     /// </summary>
     public interface ISortedChunksStorage
     {

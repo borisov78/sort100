@@ -65,22 +65,22 @@ namespace Sort100.Impl
                     currentChunk.Add(entryReader.Current);
                 }
                 
-                // Если достигнут максимально допустимый размер Сргтл или файл кончился - отдаем Chunk нга обработку
+                // Если достигнут максимально допустимый размер Chunk или файл закончился - отдаем Chunk на обработку
                 if (currentChunk.IsFool 
                     || currentChunkLength >= _algParams.ChunkSizeInChars 
                     || entryReader.Current == null && currentChunkLength > 0)
                 {
                     // Получаем первый свободный обработчик
                     var firstReadyProcessor = GetFirstReadyListener();
-                    // Отдаем ему текущий Chunk, но окончания обработки не ждем - начинаем читать следюущие Chunk.
-                    // Таким образом полчаем параллелизацию чтения исходного файла и сортировки + сохранения отдельных частей.
+                    // Отдаем ему текущий Chunk, но окончания обработки не ждем - начинаем читать следюущий Chunk.
+                    // Таким образом обеспечиваем параллелизацию чтения исходного файла и сортировки/сохранения отдельных частей.
                     firstReadyProcessor.StartProcess(currentChunk);
                     currentChunk = InitNewChunk();
                     currentChunkLength = 0;
                 }
             } while (entryReader.Current != null);
 
-            // Исходнеый файл прочитан. Теперь ждем, когда будут обработаны оставшиеся чанки.
+            // Исходный файл прочитан. Теперь ждем, когда будут обработаны оставшиеся чанки.
             WaitForAllListeners();
         }
 

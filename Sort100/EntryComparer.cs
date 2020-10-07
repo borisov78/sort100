@@ -12,7 +12,7 @@ namespace Sort100
             if (ReferenceEquals(null, y)) return 1;
             if (ReferenceEquals(null, x)) return -1;
 
-            // Performance optimization: не создаем новых строк, работаем са спанами, построенными над исходной строкой
+            // Performance optimization: не создаем новых строк, работаем со спанами, построенными над исходной строкой
             var xStringPart = x.Raw.AsSpan().Slice(x.IndexOfStartStringPart);
             var yStringPart = y.Raw.AsSpan().Slice(y.IndexOfStartStringPart);
             var stringPartComparison = xStringPart.CompareTo(yStringPart, StringComparison.Ordinal);

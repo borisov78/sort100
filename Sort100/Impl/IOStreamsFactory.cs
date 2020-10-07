@@ -20,7 +20,7 @@ namespace Sort100.Impl
             var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.None,
                 _ioParams.ReadBufferSizeInBytes, FileOptions.SequentialScan);
             // Performance optimization: временные файлы будем сохранять и читать с быстрой компрессией.
-            // На утилизацию CPU почти не влияет, но на ~60% уменьшает размер файлов (экономия операций ввода-вывода).
+            // На утилизацию CPU это почти не влияет, но на ~60% уменьшает размер файлов (экономия операций ввода-вывода).
             return useCompression
                 ? (Stream) new BrotliStream(fileStream, CompressionMode.Decompress, false)
                 : fileStream;

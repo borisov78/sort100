@@ -5,8 +5,9 @@ using System.Runtime.CompilerServices;
 namespace Sort100
 {
     /// <summary>
-    /// Бинарное дерево (Min Heap) для поиска минимальных значений среди множест упорядоченных объектов
-    /// с последовательным доступом (Chunk) со сложностью O(log n). См. https://www.geeksforgeeks.org/binary-heap/ 
+    /// Бинарное дерево (Min Heap) для поиска минимальных значений среди множеств упорядоченных объектов
+    /// с последовательным доступом (Chunk). Сложность поиска O(log n).
+    /// См. https://www.geeksforgeeks.org/binary-heap/ 
     /// </summary>
     internal sealed class MinHeap
     {
@@ -83,16 +84,20 @@ namespace Sort100
             ReBalanceUp();
         }
 
-        public bool TryGetMin(out Entry minEntry)
+        public bool TryPopAndWriteMin(EntryWriter writer)
         {
-            minEntry = null;
             var readerWithMinEntry = Pop();
             if (readerWithMinEntry == null)
                 return false;
-            minEntry = readerWithMinEntry.Current;
+            
+            var minEntry = readerWithMinEntry.Current;
+            
             readerWithMinEntry.ReadNext();
             if (readerWithMinEntry.Current != null)
                 Add(readerWithMinEntry);
+            
+            if (minEntry != null)
+                writer.Write(minEntry);
             return minEntry != null;
         }
 

@@ -3,6 +3,9 @@ using System.IO;
 
 namespace Sort100
 {
+    /// <summary>
+    /// Десериализатор объектов Entry из стрима.
+    /// </summary>
     public sealed class EntryReader : IDisposable
     {
         private readonly Stream _innerStream;

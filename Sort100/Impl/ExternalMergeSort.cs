@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime;
 using Sort100.Interfaces;
 using Sort100.Params;
 
@@ -44,9 +43,8 @@ namespace Sort100.Impl
             var minHeap = new MinHeap(sortedChunksReaders, _entryComparer);
             // Извлекаем минимальные значения и пишем их в результирующий файл
             long totalEntriesWritten = 0;
-            while (minHeap.TryGetMin(out var minEntry))
+            while (minHeap.TryPopAndWriteMin(entryWriter))
             {
-                entryWriter.Write(minEntry);
                 /*totalEntriesWritten++;
                 if (totalEntriesWritten % 1000000 == 0)
                 {

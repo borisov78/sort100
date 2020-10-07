@@ -16,13 +16,13 @@ namespace Sort100.Generator
             var cmdParser = new CmdParser(args);
             if (cmdParser.IsEmpty)
             {
-                Console.WriteLine($"Usage: sort100gen {ParamNames.File} = <input_file> [--{ParamNames.Size}=<file size in Gb>]");
-                Console.WriteLine($"Sample: sort100gen {ParamNames.File}=c:/testdata.txt --{ParamNames.Size}=1");
+                Console.WriteLine($"Usage: sort100gen {ParamNames.Output} = <output_file> [--{ParamNames.Size}=<file size in Gb>]");
+                Console.WriteLine($"Sample: sort100gen {ParamNames.Output}=c:/testdata.txt --{ParamNames.Size}=1");
                 return;
             }
 
-            var filePathParam = cmdParser.Get<string>("file");
-            var fileSizeInGb = cmdParser.GetOrDefault("size", 1);
+            var filePathParam = cmdParser.Get<string>(ParamNames.Output);
+            var fileSizeInGb = cmdParser.GetOrDefault(ParamNames.Size, 1);
 
             var sw = Stopwatch.StartNew();
             GenerateTestFile(filePathParam, fileSizeInGb);
