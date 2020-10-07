@@ -1,0 +1,21 @@
+﻿bin/
+obj/
+TestResults/
+Debug/
+Release/
+packages/
+*.suo
+*.user
+*.vsmdi
+*.ncb
+*.sln.cache
+*.sln.ide
+.vs/
+*.dbmdl
+*.rdl.data
+# resharper
+_resharper.*/
+*.dotCover
+*.DotSettings.user
+.idea
+.idea/*
